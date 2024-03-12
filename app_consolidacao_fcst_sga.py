@@ -14,7 +14,8 @@ if uploaded_files is not None:
         dataframe = pd.read_excel(uploaded_file, 
                                   sheet_name='CargaDW_ForecastBR')
 
-        sga_forecast = pd.concat([sga_forecast, dataframe], ignore_index=True)
+        sga_forecast = pd.concat([sga_forecast, dataframe],
+                                 ignore_index=True)
 
 # towrite = BytesIO()
 # sga_forecast.to_excel(towrite, index=False)
