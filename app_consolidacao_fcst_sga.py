@@ -11,7 +11,7 @@ def concatenate_dataframes(dfs):
     return pd.concat(dfs, ignore_index=True, index=0)
 
 
-# Streamlit app starts here
+# Streamlit app starts here 
 st.title('Consolidador - Forecast SGA')
 
 uploaded_files = st.file_uploader("Suba os arquivos", accept_multiple_files=True, type=['xlsx'])
