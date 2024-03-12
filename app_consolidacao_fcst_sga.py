@@ -16,16 +16,15 @@ if uploaded_files is not None:
 
         dfs.append(dataframe)
 
-    sga_forecast = pd.concat(dfs, ignore_index=True)
+sga_forecast = pd.concat(dfs, ignore_index=True)
+# towrite = BytesIO()
+# sga_forecast.to_excel(towrite, index=False)
+# towrite.seek(0)
 
-    # towrite = BytesIO()
-    # sga_forecast.to_excel(towrite, index=False)
-    # towrite.seek(0)
-    
-    st.write("Tabela final:")
-    st.dataframe(sga_forecast)
-    # st.success("Arquivo consolidado com sucesso!")
-    # st.download_button(label="📥 Download Excel Consolidado",
-    #         data=towrite,
-    #         file_name='forecast_sga_consolidado.xlsx',
-    #         mime="application/vnd.ms-excel")
+st.write("Tabela final:")
+st.dataframe(sga_forecast)
+# st.success("Arquivo consolidado com sucesso!")
+# st.download_button(label="📥 Download Excel Consolidado",
+#         data=towrite,
+#         file_name='forecast_sga_consolidado.xlsx',
+#         mime="application/vnd.ms-excel")
