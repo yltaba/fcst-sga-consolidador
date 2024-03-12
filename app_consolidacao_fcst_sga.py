@@ -16,7 +16,7 @@ if uploaded_files is not None:
 
         dfs.append(dataframe)
 
-        sga_forecast = pd.concat(dfs, ignore_index=True)
+    sga_forecast = pd.concat(dfs, ignore_index=True)
 
     towrite = BytesIO()
     sga_forecast.to_excel(towrite, index=False)
