@@ -4,7 +4,7 @@ from io import BytesIO
 
 def load_excel(file):
     """Load an Excel file into a pandas DataFrame."""
-    return pd.read_excel(file)
+    return pd.read_excel(file, sheet_name='CargaDW_ForecastBR')
 
 def concatenate_dataframes(dfs):
     """Concatenate a list of DataFrames into a single DataFrame."""
