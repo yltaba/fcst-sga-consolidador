@@ -1,36 +1,30 @@
+from io import BytesIO
 import streamlit as st
 import pandas as pd
-from io import BytesIO
 
-def load_excel(file):
-    """Load an Excel file into a pandas DataFrame."""
-    return pd.read_excel(file, sheet_name='CargaDW_ForecastBR')
-
-def concatenate_dataframes(dfs):
-    """Concatenate a list of DataFrames into a single DataFrame."""
-    return pd.concat(dfs, ignore_index=True, index=0)
-
-
-# Streamlit app starts here
 st.title('Consolidador - Forecast SGA')
 
-uploaded_files = st.file_uploader("Suba os arquivos", accept_multiple_files=True, type=['xlsx'])
+uploaded_files = st.file_uploader("Selecione os arquivos para consolidação", 
+                                  accept_multiple_files=True)
 
-if uploaded_files:
-    dataframes = [load_excel(file) for file in uploaded_files]
-    concatenated_df = concatenate_dataframes(dataframes)
+dfs = []
+if uploaded_files is not None:
+    for uploaded_file in uploaded_files:
 
-    # Display the concatenated DataFrame
-    st.write("Tabela final:")
-    st.dataframe(concatenated_df)
+        dataframe = pd.read_excel(uploaded_file, 
+                                  sheet_name='CargaDW_ForecastBR')
 
-    # EXPORT EXCEL
+        dfs.append(dataframe)
+
+        sga_forecast = pd.concat(dfs, ignore_index=True)
+
     towrite = BytesIO()
-    concatenated_df.to_excel(towrite, index=False)
+    sga_forecast.to_excel(towrite, index=False)
     towrite.seek(0)
     
-    st.dataframe(concatenated_df)
-    st.success("Arquivos consolidados com sucesso!")
+    st.write("Tabela final:")
+    st.dataframe(sga_forecast)
+    st.success("Arquivo consolidado com sucesso!")
     st.download_button(label="📥 Download Excel Consolidado",
             data=towrite,
             file_name='forecast_sga_consolidado.xlsx',
