@@ -9,8 +9,8 @@ uploaded_files = st.file_uploader("Selecione os arquivos para consolidação",
 
 
 # files = []
-for file in uploaded_files.name:
-    st.write(file)
+for file in uploaded_files:
+    st.write(file.name)
 
 sga_forecast = pd.DataFrame()
 
