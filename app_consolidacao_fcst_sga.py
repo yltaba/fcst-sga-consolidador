@@ -8,10 +8,6 @@ uploaded_files = st.file_uploader("Selecione os arquivos para consolidação",
                                   accept_multiple_files=True)
 
 
-# files = []
-for file in uploaded_files:
-    st.write(file.name)
-
 sga_forecast = pd.DataFrame()
 
 if uploaded_files:
@@ -21,7 +17,7 @@ if uploaded_files:
         dataframe = pd.read_excel(uploaded_file, 
                                   sheet_name='CargaDW_ForecastBR')
         
-        # dataframe['tabela'] = uploaded_file
+        dataframe['tabela'] = uploaded_file.name
 
         sga_forecast = pd.concat([sga_forecast, dataframe],
                                  ignore_index=True)
